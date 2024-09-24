@@ -1,0 +1,8 @@
+FROM python:latest
+COPY . /app
+COPY ./requirements.txt /app
+WORKDIR /app
+RUN python -m venv image-venv
+RUN ./image-venv/bin/pip install -r requirements.txt
+EXPOSE 8000
+CMD ./image-venv/bin/python manage.py runserver 0.0.0.0:8000

@@ -1,0 +1,22 @@
+FROM node:21-alpine as builder
+
+RUN mkdir /app
+
+COPY . /app
+RUN cd app/ ; npm install
+
+FROM node:21-alpine
+
+RUN mkdir /app
+
+COPY --from=builder /app/package.json /app/package-lock.json /app/tailwind.config.js /app/
+COPY --from=builder /app/public/index.html /app/public/
+COPY --from=builder /app/src /app/src
+
+RUN cd app/ ; npm install
+
+WORKDIR /app
+
+EXPOSE 3000
+
+CMD ["npm", "start"]

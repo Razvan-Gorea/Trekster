@@ -1,0 +1,4 @@
+db.sqlite*
+*.pyc
+trekster/__pycache__/*
+trekster/trekster_app/__pycache__/*
